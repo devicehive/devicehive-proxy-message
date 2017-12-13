@@ -20,6 +20,8 @@ class MessageUtils {
     static get SUCCESS_STATUS() { return 0; }
     static get FAILED_STATUS() { return 1; }
 
+    static get REQUEST() { return `request`; }
+    static get RESPONSE() { return `response`; }
 }
 
 
