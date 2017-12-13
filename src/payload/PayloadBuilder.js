@@ -1,17 +1,18 @@
-const MessageUtils = require(`./MessageUtils`);
-const TopicCreatePayload = require(`./payload/TopicCreatePayload.js`);
-const TopicListPayload = require(`./payload/TopicListPayload.js`);
-const TopicSubscribePayload = require(`./payload/TopicSubscribePayload.js`);
-const TopicUnsubscribePayload = require(`./payload/TopicUnsubscribePayload.js`);
-const NotificationCreatePayload = require(`./payload/NotificationCreatePayload.js`);
-const NotificationPayload = require(`./payload/NotificationPayload.js`);
-const HealthPayload = require(`./payload/HealthPayload.js`);
-const PluginAuthenticatePayload = require(`./payload/PluginAuthenticatePayload.js`);
-const TokenPayload = require(`./payload/TokenPayload.js`);
-const ErrorPayload = require(`./payload/ErrorPayload.js`);
+const MessageUtils = require(`../MessageUtils`);
+const TopicCreatePayload = require(`./TopicCreatePayload.js`);
+const TopicListPayload = require(`./TopicListPayload.js`);
+const TopicSubscribePayload = require(`./TopicSubscribePayload.js`);
+const TopicUnsubscribePayload = require(`./TopicUnsubscribePayload.js`);
+const NotificationCreatePayload = require(`./NotificationCreatePayload.js`);
+const NotificationPayload = require(`./NotificationPayload.js`);
+const HealthPayload = require(`./HealthPayload.js`);
+const PluginAuthenticatePayload = require(`./PluginAuthenticatePayload.js`);
+const TokenPayload = require(`./TokenPayload.js`);
+const ErrorPayload = require(`./ErrorPayload.js`);
 
 const typeActionPayloadMap = new Map();
 
+typeActionPayloadMap.set(`${MessageUtils.ERROR}`, ErrorPayload);
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.CREATE_ACTION}:${MessageUtils.RESPONSE}`, TopicCreatePayload);
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.LIST_ACTION}:${MessageUtils.RESPONSE}`, TopicListPayload);
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.SUBSCRIBE_ACTION}:${MessageUtils.RESPONSE}`, TopicSubscribePayload);
@@ -26,10 +27,15 @@ typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.UNSUBSCRIBE_
 typeActionPayloadMap.set(`${MessageUtils.NOTIFICATION_TYPE}:${MessageUtils.NO_ACTION}:${MessageUtils.REQUEST}`, NotificationCreatePayload);
 typeActionPayloadMap.set(`${MessageUtils.PLUGIN_TYPE}:${MessageUtils.AUTHENTICATE_ACTION}:${MessageUtils.REQUEST}`, PluginAuthenticatePayload);
 
+
 /**
- * DeviceHive message payload normalizer class
+ * DeviceHive proxy message builder class
  */
-class PayloadNormalizer {
+class PayloadBuilder {
+
+    static get payloadClassMap() {
+        return typeActionPayloadMap;
+    }
 
     /**
      * Transforms raw DeviceHive proxy message payload to JS object with full named fields
@@ -42,15 +48,35 @@ class PayloadNormalizer {
     static normalize({ type, action, status, payload } = {}) {
         let payloadClass;
 
-        if (status === MessageUtils.FAILED_STATUS) {
-            payloadClass = ErrorPayload;
-        } else {
-            payloadClass = typeActionPayloadMap.get(`${type}:${action}:${status ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
+        if (type !== MessageUtils.ACK_TYPE) {
+            payloadClass = status === MessageUtils.FAILED_STATUS ?
+                PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
+                PayloadBuilder.payloadClassMap.get(`${type}:${action}:${status ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
         }
 
         return payloadClass ? payloadClass.normalize(payload) : payloadClass;
     }
+
+    /**
+     * Creates specific message payload object
+     * @param type - message type
+     * @param action - message action
+     * @param status - message status
+     * @param payload - payload data
+     * @returns {Payload}
+     */
+    static build({ type, action, status, payload } = {}) {
+        let payloadClass;
+
+        if (type !== MessageUtils.ACK_TYPE) {
+            payloadClass = status === MessageUtils.FAILED_STATUS ?
+                PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
+                PayloadBuilder.payloadClassMap.get(`${type}:${action}:${status ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
+        }
+
+        return payloadClass ? new payloadClass(payload) : payloadClass;
+    }
 }
 
 
-module.exports = PayloadNormalizer;
+module.exports = PayloadBuilder;

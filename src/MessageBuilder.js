@@ -1,10 +1,5 @@
 const Message = require(`./Message`);
 const MessageUtils = require(`./MessageUtils`);
-const TopicCreatePayload = require(`./payload/TopicCreatePayload.js`);
-const TopicSubscribePayload = require(`./payload/TopicSubscribePayload.js`);
-const TopicUnsubscribePayload = require(`./payload/TopicUnsubscribePayload.js`);
-const NotificationCreatePayload = require(`./payload/NotificationCreatePayload.js`);
-const PluginAuthenticatePayload = require(`./payload/PluginAuthenticatePayload.js`);
 
 
 /**
@@ -23,7 +18,7 @@ class MessageBuilder {
             id: id,
             type: MessageUtils.TOPIC_TYPE,
             action: MessageUtils.CREATE_ACTION,
-            payload: new TopicCreatePayload(payload)
+            payload: payload
         });
     };
 
@@ -51,7 +46,7 @@ class MessageBuilder {
             id: id,
             type: MessageUtils.TOPIC_TYPE,
             action: MessageUtils.SUBSCRIBE_ACTION,
-            payload: new TopicSubscribePayload(payload)
+            payload: payload
         });
     };
 
@@ -66,7 +61,7 @@ class MessageBuilder {
             id: id,
             type: MessageUtils.TOPIC_TYPE,
             action: MessageUtils.UNSUBSCRIBE_ACTION,
-            payload: new TopicUnsubscribePayload(payload)
+            payload: payload
         });
     };
 
@@ -81,7 +76,7 @@ class MessageBuilder {
             id: id,
             type: MessageUtils.NOTIFICATION_TYPE,
             action: MessageUtils.CREATE_ACTION,
-            payload: new NotificationCreatePayload(payload)
+            payload: payload
         });
     };
 
@@ -96,7 +91,7 @@ class MessageBuilder {
             id: id,
             type: MessageUtils.PLUGIN_TYPE,
             action: MessageUtils.AUTHENTICATE_ACTION,
-            payload: new PluginAuthenticatePayload(payload)
+            payload: payload
         });
     };
 

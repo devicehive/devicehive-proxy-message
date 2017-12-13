@@ -1,5 +1,5 @@
 const MessageUtils = require(`./MessageUtils`);
-const PayloadNormalizer = require(`./PayloadNormalizer`);
+const PayloadBuilder = require(`./payload/PayloadBuilder`);
 
 
 /**
@@ -23,7 +23,7 @@ class Message {
             type: t,
             action: a,
             status: s,
-            payload: p ? PayloadNormalizer.normalize({
+            payload: p ? PayloadBuilder.normalize({
                 type: t,
                 action: a || MessageUtils.NO_ACTION,
                 status: s,
@@ -46,8 +46,13 @@ class Message {
         me.id = id;
         me.type = type;
         me.action = action;
-        me.payload = payload;
         me.status = status;
+        me.payload = payload.isNormalized ? payload : PayloadBuilder.build({
+            type: type,
+            action: action || MessageUtils.NO_ACTION,
+            status: status,
+            payload: payload
+        });
     }
 
     get id() {

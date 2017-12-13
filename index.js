@@ -11,14 +11,12 @@ const PluginAuthenticatePayload = require(`./src/payload/PluginAuthenticatePaylo
 const HealthPayload = require(`./src/payload/HealthPayload.js`);
 const TokenPayload = require(`./src/payload/TokenPayload.js`);
 const ErrorPayload = require(`./src/payload/ErrorPayload.js`);
-const PayloadNormalizer = require(`./src/PayloadNormalizer.js`);
 
 
 module.exports = {
     Message: Message,
     MessageBuilder: MessageBuilder,
     MessageUtils: MessageUtils,
-    PayloadNormalizer: PayloadNormalizer,
     payload: {
         TopicCreatePayload: TopicCreatePayload,
         TopicListPayload: TopicListPayload,

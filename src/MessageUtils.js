@@ -22,6 +22,7 @@ class MessageUtils {
 
     static get REQUEST() { return `request`; }
     static get RESPONSE() { return `response`; }
+    static get ERROR() { return `error`; }
 }
 
 

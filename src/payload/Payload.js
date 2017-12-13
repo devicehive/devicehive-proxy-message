@@ -5,6 +5,14 @@
 class Payload {
 
     /**
+     * Normalized payload check flag
+     * @returns {boolean}
+     */
+    get isNormalized() {
+        return true;
+    }
+
+    /**
      * Returns raw proxy message payload as string
      * @returns {string}
      */
