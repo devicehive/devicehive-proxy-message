@@ -1,6 +1,6 @@
 {
   "name": "devicehive-proxy-message",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DeviceHive proxy messages classes",
   "main": "index.js",
   "repository": {
