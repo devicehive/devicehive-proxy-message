@@ -47,12 +47,12 @@ class Message {
         me.type = type;
         me.action = action;
         me.status = status;
-        me.payload = payload.isNormalized ? payload : PayloadBuilder.build({
+        me.payload = payload ? (payload.isNormalized ? payload : PayloadBuilder.build({
             type: type,
             action: action || MessageUtils.NO_ACTION,
             status: status,
             payload: payload
-        });
+        })) : payload;
     }
 
     get id() {
