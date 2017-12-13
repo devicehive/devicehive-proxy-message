@@ -1,0 +1,21 @@
+{
+  "name": "devicehive-proxy-message",
+  "version": "1.0.0",
+  "description": "DeviceHive proxy messages classes",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devicehive/devicehive-proxy-message.git"
+  },
+  "keywords": [
+    "devicehive",
+    "proxy",
+    "message"
+  ],
+  "author": "Igor Trambovetskiy",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/devicehive/devicehive-proxy-message/issues"
+  },
+  "homepage": "https://github.com/devicehive/devicehive-proxy-message#readme"
+}
