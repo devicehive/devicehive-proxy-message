@@ -10,7 +10,7 @@ const NotificationPayload = require(`./src/payload/NotificationPayload.js`);
 const PluginAuthenticatePayload = require(`./src/payload/PluginAuthenticatePayload.js`);
 const HealthPayload = require(`./src/payload/HealthPayload.js`);
 const TokenPayload = require(`./src/payload/TokenPayload.js`);
-const ErrorPayload = require(`./ErrorPayload.js`);
+const ErrorPayload = require(`./src/payload/ErrorPayload.js`);
 const PayloadNormalizer = require(`./src/PayloadNormalizer.js`);
 
 
