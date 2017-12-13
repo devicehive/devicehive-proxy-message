@@ -114,30 +114,6 @@ const { MessageBuilder } = require(`devicehive-proxy-message`);
 const requestMessage = MessageBuilder.listTopics(1);
 ```
 
-## PayloadNormalizer
-PayloadNormalizer is a class with next static members:
-
-- _PayloadNormalizer_.**normalize**({ type, action, status, payload })  
-  
-_type_ - message type  
-_action_ - message action  
-_status_ - message status  
-_payload_ - message payload  
-
-Usage example:
-```js
-const { PayloadNormalizer, MessageUtils } = require(`devicehive-proxy-message`);
-
-const listTopicPayload = PayloadNormalizer.normalize({
-    type: MessageUtils.TOPIC_TYPE,
-    action: MessageUtils.LIST_ACTION,
-    status: MessageUtils.SUCCESS_STATUS,
-    payload: {
-        "t": ["testTopic"]
-    }
-});
-```
-
 PayloadNormalizer is used by Message class in normalize method.
 
 # Payloads

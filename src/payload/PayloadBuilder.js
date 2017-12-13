@@ -51,7 +51,8 @@ class PayloadBuilder {
         if (type !== MessageUtils.ACK_TYPE) {
             payloadClass = status === MessageUtils.FAILED_STATUS ?
                 PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
-                PayloadBuilder.payloadClassMap.get(`${type}:${action}:${status ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
+                PayloadBuilder.payloadClassMap
+                    .get(`${type}:${action}:${status === MessageUtils.SUCCESS_STATUS ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
         }
 
         return payloadClass ? payloadClass.normalize(payload) : payloadClass;
@@ -71,7 +72,8 @@ class PayloadBuilder {
         if (type !== MessageUtils.ACK_TYPE) {
             payloadClass = status === MessageUtils.FAILED_STATUS ?
                 PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
-                PayloadBuilder.payloadClassMap.get(`${type}:${action}:${status ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
+                PayloadBuilder.payloadClassMap
+                    .get(`${type}:${action}:${status === MessageUtils.SUCCESS_STATUS ? MessageUtils.RESPONSE : MessageUtils.REQUEST}`);
         }
 
         return payloadClass ? new payloadClass(payload) : payloadClass;
