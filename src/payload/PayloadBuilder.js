@@ -24,7 +24,7 @@ typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.CREATE_ACTIO
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.LIST_ACTION}:${MessageUtils.REQUEST}`, TopicListPayload);
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.SUBSCRIBE_ACTION}:${MessageUtils.REQUEST}`, TopicSubscribePayload);
 typeActionPayloadMap.set(`${MessageUtils.TOPIC_TYPE}:${MessageUtils.UNSUBSCRIBE_ACTION}:${MessageUtils.REQUEST}`, TopicUnsubscribePayload);
-typeActionPayloadMap.set(`${MessageUtils.NOTIFICATION_TYPE}:${MessageUtils.NO_ACTION}:${MessageUtils.REQUEST}`, NotificationCreatePayload);
+typeActionPayloadMap.set(`${MessageUtils.NOTIFICATION_TYPE}:${MessageUtils.CREATE_ACTION}:${MessageUtils.REQUEST}`, NotificationCreatePayload);
 typeActionPayloadMap.set(`${MessageUtils.PLUGIN_TYPE}:${MessageUtils.AUTHENTICATE_ACTION}:${MessageUtils.REQUEST}`, PluginAuthenticatePayload);
 
 
