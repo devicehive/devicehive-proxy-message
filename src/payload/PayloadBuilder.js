@@ -48,7 +48,7 @@ class PayloadBuilder {
     static normalize({ type, action, status, payload } = {}) {
         let payloadClass;
 
-        if (type !== MessageUtils.ACK_TYPE) {
+        if (type !== MessageUtils.ACK_TYPE || status === MessageUtils.FAILED_STATUS) {
             payloadClass = status === MessageUtils.FAILED_STATUS ?
                 PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
                 PayloadBuilder.payloadClassMap
@@ -69,7 +69,7 @@ class PayloadBuilder {
     static build({ type, action, status, payload } = {}) {
         let payloadClass;
 
-        if (type !== MessageUtils.ACK_TYPE) {
+        if (type !== MessageUtils.ACK_TYPE || status === MessageUtils.FAILED_STATUS) {
             payloadClass = status === MessageUtils.FAILED_STATUS ?
                 PayloadBuilder.payloadClassMap.get(MessageUtils.ERROR) :
                 PayloadBuilder.payloadClassMap
