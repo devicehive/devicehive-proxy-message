@@ -154,6 +154,7 @@ TopicListPayload object:
 Raw payload: 
 ```
 {
+    "sg": <subscription group>,
     "t": <list of topics>
 }
 ```
@@ -161,6 +162,7 @@ Raw payload:
 TopicSubscribePayload object: 
 ```
 {
+    "subscriptionGroup": <subscription group>,
     "topicList": <list of topics>
 }
 ```
@@ -169,6 +171,7 @@ TopicSubscribePayload object:
 Raw payload: 
 ```
 {
+    "sg": <subscription group>,
     "t": <list of topics>
 }
 ```
@@ -176,6 +179,7 @@ Raw payload:
 TopicUnsubscribePayload object: 
 ```
 {
+    "subscriptionGroup": <subscription group>,
     "topicList": <list of topics>,
 }
 ```
