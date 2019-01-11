@@ -11,13 +11,15 @@ class NotificationCreatePayload extends Payload {
      * @param t - notification topic
      * @param m - notification message
      * @param part - notification partition
+     * @param type - notification type
      * @returns {NotificationCreatePayload}
      */
-    static normalize({ t, m, part } = {}) {
+    static normalize({ t, m, part, type } = {}) {
         return new NotificationCreatePayload({
             topic: t,
             message: m,
-            partition: part
+            partition: part,
+            type: type
         });
     }
 
@@ -26,8 +28,9 @@ class NotificationCreatePayload extends Payload {
      * @param topic - notification topic
      * @param message - notification message
      * @param partition - notification partition
+     * @param type - notification type
      */
-    constructor({ topic, message, partition } = {}) {
+    constructor({ topic, message, partition, type } = {}) {
         super();
 
         const me = this;
@@ -35,6 +38,7 @@ class NotificationCreatePayload extends Payload {
         me.topic = topic;
         me.message = message;
         me.partition = partition;
+        me.type = type;
     }
 
     get topic() {
@@ -73,6 +77,18 @@ class NotificationCreatePayload extends Payload {
         me._partition = value;
     }
 
+    get type() {
+        const me = this;
+
+        return me._type;
+    }
+
+    set type(value) {
+        const me = this;
+
+        me._type = value;
+    }
+
     /**
      * Transforms full named DeviceHive proxy message notification create payload to raw proxy message
      * @returns {{t: *, m: *, part: *}}
@@ -83,7 +99,8 @@ class NotificationCreatePayload extends Payload {
         return {
             t: me.topic,
             m: me.message,
-            part: me.partition
+            part: me.partition,
+            type: me.type
         }
     }
 }

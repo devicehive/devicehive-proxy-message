@@ -23,6 +23,9 @@ class MessageUtils {
     static get REQUEST() { return `request`; }
     static get RESPONSE() { return `response`; }
     static get ERROR() { return `error`; }
+
+    static get REQUEST_NOTIFICATION() { return 0; }
+    static get RESPONSE_NOTIFICATION() { return 1; }
 }
 
 
