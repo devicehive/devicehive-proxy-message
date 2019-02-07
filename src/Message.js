@@ -15,14 +15,16 @@ class Message {
      * @param a - raw message action
      * @param p - raw message payload
      * @param s - raw message status
+     * @param st - raw message source topic
      * @returns {Message}
      */
-    static normalize({ id, t, a, p, s } = {}) {
+    static normalize({ id, t, a, p, s, st } = {}) {
         return new Message({
             id: id,
             type: t,
             action: a,
             status: s,
+            srcTopic: st,
             payload: p ? PayloadBuilder.normalize({
                 type: t,
                 action: a || MessageUtils.NO_ACTION,
@@ -39,14 +41,16 @@ class Message {
      * @param action - message action
      * @param payload - message payload
      * @param status - message status
+     * @param srcTopic - message source topic
      */
-    constructor({ id, type, action, payload, status } = {}) {
+    constructor({ id, type, action, payload, status, srcTopic } = {}) {
         const me = this;
 
         me.id = id;
         me.type = type;
         me.action = action;
         me.status = status;
+        me.srcTopic = srcTopic;
         me.payload = payload ? (payload.isNormalized ? payload : PayloadBuilder.build({
             type: type,
             action: action || MessageUtils.NO_ACTION,
@@ -115,6 +119,18 @@ class Message {
         me._status = value;
     }
 
+    get srcTopic() {
+        const me = this;
+
+        return me._srcTopic;
+    }
+
+    set srcTopic(value) {
+        const me = this;
+
+        me._srcTopic = value;
+    }
+
     /**
      * Transforms full named DeviceHive proxy message to raw proxy message
      * @returns {{id: *, t: *, a: *, s: *, p: *}}
@@ -128,6 +144,7 @@ class Message {
             t: me.type,
             a: me.action,
             s: me.status,
+            st: me.srcTopic,
             p: payload
         }
     }
